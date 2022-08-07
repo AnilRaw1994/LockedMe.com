@@ -4,25 +4,18 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Lockers {
-static String Directory;
 static File files = new File("C:\\Users\\anil.rawat\\eclipse-workspace\\LockedMe.com");
-
-/* public Lockers() {
-files = new File ("C:\\Users\\anil.rawat\\eclipse-workspace\\LockedMe.com");
-System.out.print(files);
-}*/
 	static void mainmenu() throws IOException {
 	Scanner sc = new Scanner(System.in);
-	System.out.println("\n 1. Directory" + "\n 2. Details of the User Interface" + "\n 3. Closing the Application" + "\n \n Please enter your requirement (Sr. No. 1, 2 & 3)");
+	System.out.println(" 1. Directory" + "\n 2. Details of the User Interface" + "\n 3. Closing the Application" + "\n \n Please enter your requirement (Sr. No. 1, 2 & 3)");
 	int sr = sc.nextInt();
 	switch(sr){
 	case 1:{
-		//File file = new File ("C:\\Users\\anil.rawat\\eclipse-workspace\\LockedMe.com");
 		File[] qty = files.listFiles();
 		System.out.println("List of Files Available in Directory");
 		Arrays.sort(qty);
 		for (int i = 0; i<=qty.length-1;i++) {
-		System.out.println(qty[i].getName());	
+		System.out.println(qty[i].getName());
 		}
 	break;
 	}
@@ -33,101 +26,91 @@ System.out.print(files);
 			//Nested Switch Starts
 			switch(sr1) {
 			case 1:{
-			Lockers.addfiles();
-			break;
+					System.out.println("Enter File Name to be Added");
+					String inputfile = sc.next();
+					Lockers.addfiles(inputfile);
+					break;
 			}
 			case 2: {
-			Lockers.deletefiles();
-			break;
+					 System.out.println("Enter File Name to be Deleted");
+					 String inputfile = sc.next();
+					 Lockers.deletefiles(inputfile);
+					 break;
 			}
 			case 3: {
-			Lockers.searchfiles();
-			break;
+					 System.out.println("Enter File Name need to be Searched");
+					 String inputfile = sc.next();
+					 Lockers.searchfiles(inputfile);
+					 break;
 			}
 			case 4: {
-			System.out.println("Back to the Main Menu \n");
-			Lockers.returntomainmenu();
-			break;
+					 System.out.println("\n Back to the Main Menu");
+					 Lockers.returntomainmenu();
+					 break;
 			}
-				}//Nested Switch ends
-			break;}
-	case 3: {
-		System.out.println("Application Closed");
-		System.exit(0);
-		break;
-		}
-		}
-		
-	sc.close();}
-	static void addfiles() throws IOException {
-		Scanner sc = new Scanner(System.in);
-		//File files = new File("C:\\Users\\anil.rawat\\eclipse-workspace\\LockedMe.com");
-		System.out.println("Enter File Name to be Added");
-		String inputfile = sc.next();
-		inputfile = inputfile + ".txt";
-		File file = new File(inputfile);
-		if(file.createNewFile()) {
-		System.out.println(inputfile + " "+ "file Created Successfully");
-			}else 
-				{
-		System.out.println(inputfile + " file not Created Successfully");
+			default:
+				System.out.println("You Enter Invalid No., Please Enter Correct No. (1, 2, 3 & 4)");
+				break;
+		   }//Nested Switch ends
+			  	break;//Case 2 Break
+		  }
+			case 3: {
+					 System.out.println("Application Closed");
+					 System.exit(0);
+					 break;
+	            	}
+	              }
+	   sc.close();
+	  }
+
+//Logic for Adding a File
+static void addfiles(String inputfile) throws IOException {
+	inputfile = inputfile + ".txt";
+	File file = new File(inputfile);
+	if(file.createNewFile()) {
+	System.out.println(inputfile + " "+ "file Created Successfully");
+		}else 
+			{
+	System.out.println(inputfile + " file not Created Successfully");
 	 }
-	sc.close();}
-		
-	static void deletefiles() throws IOException {
-		Scanner sc = new Scanner(System.in);
-		//File files = new File("C:\\Users\\anil.rawat\\eclipse-workspace\\LockedMe.com");
-		System.out.println("Enter File Name to be Deleted");
-		String inputfile = sc.next();
-		//File file = new File(inputfile);
-		File[] qty = files.listFiles();
-		for (int i =0; i<=qty.length-1;i++) {
-			System.out.println("");
-			if(qty[i].getName()==inputfile) {
-				
-				System.out.println("File Exists");
-			}
-			 		//String name = files.getName();
- 		//if(name.equals(inputfile)) {
-		//file.delete();
-		//System.out.println(inputfile + " "+ "file Deleted Successfully");
-		//break;
-		//}else 
-		//{
-			//System.out.println(inputfile + " " + "File Not Found");
-		//	break;
-		  //}
-		 }
-	   sc.close(); }
-	
-	static void searchfiles() {
-	Scanner sc = new Scanner (System.in);
-	System.out.println("Enter File Name need to be Searched");
-	//String inputfile = sc.nextLine();
-	//File [] qty = files.listFiles();
-	//for (File f : qty) {
-		/* if (qty[].getName().equals(inputfile)) {
-		System.out.println("File Found at");
-		break;
-		}else {
-			System.out.println("File not Found");
-			break;
-		 }
-		}*/
-		sc.close();
-		}
-	//}
-	static void returntomainmenu() throws IOException{
+	}
+
+
+//Logic for Deleting a Files
+static void deletefiles(String inputfile) throws IOException {
+	File path = new File (files + "/" + inputfile);
+	String [] qty = files.list();
+		 for (String f : qty) {
+			if (f.equals(inputfile) && path.delete()) {
+				System.out.println("File Deleted");
+				return;
+				}
+		       }
+		 System.out.println("File Not Deleted");
+		  }
+
+//Logic for Searching Files
+static void searchfiles(String inputfile) {
+	String [] qty = files.list();
+		 for (String f : qty){
+			 if (f.equals(inputfile)) {
+				 System.out.print(f + " : File Found at " + files);
+				 return;
+			 	}
+		 	   }
+		 System.out.println("File not Found");
+		}	
+
+//Logic for Return to Main Menu
+static void returntomainmenu() throws IOException{
 		Lockers.mainmenu();
 		}
 	
 	
+//Main Method
 public static void main(String[] args) throws IOException {
-System.out.println("Welcome to LockedMe.com");
-System.out.println("Developer - Anil Singh Rawat");
-
-Lockers.mainmenu();
-
-
-}
-}
+	System.out.println("Welcome to LockedMe.com");
+	System.out.println("Developer - Anil Singh Rawat");
+	Lockers.mainmenu();
+    }
+   }
