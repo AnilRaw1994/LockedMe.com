@@ -12,11 +12,16 @@ static File files = new File("C:\\Users\\anil.rawat\\eclipse-workspace\\LockedMe
 	switch(sr){
 	case 1:{
 		File[] qty = files.listFiles();
+		try {Arrays.sort(qty);
 		System.out.println("List of Files Available in Directory");
-		Arrays.sort(qty);
 		for (int i = 0; i<=qty.length-1;i++) {
 		System.out.println(qty[i].getName());
 		}
+		}
+		catch (Exception e) {
+			System.out.println("File Not Exist");
+		}
+		
 	break;
 	}
 	case 2:{
@@ -83,6 +88,7 @@ static void addfiles(String inputfile) throws IOException {
 static void deletefiles(String inputfile) throws IOException {
 	File path = new File (files + "/" + inputfile);
 	String [] qty = files.list();
+	try {
 		 for (String f : qty) {
 			if (f.equals(inputfile) && path.delete()) {
 				System.out.println("File Deleted");
@@ -90,11 +96,16 @@ static void deletefiles(String inputfile) throws IOException {
 				}
 		       }
 		 System.out.println("File Not Deleted");
+	}catch (Exception e) {
+		System.out.println("Folder Not Found");
+	}
+		 
 		  }
 
 //Logic for Searching Files
 static void searchfiles(String inputfile) {
 	String [] qty = files.list();
+	try {
 		 for (String f : qty){
 			 if (f.equals(inputfile)) {
 				 System.out.print(f + " : File Found at " + files);
@@ -102,6 +113,10 @@ static void searchfiles(String inputfile) {
 			 	}
 		 	   }
 		 System.out.println("File not Found");
+	}catch (Exception e) {
+		System.out.println("Folder Not Found");
+		
+	}
 		}	
 
 //Logic for Return to Main Menu
