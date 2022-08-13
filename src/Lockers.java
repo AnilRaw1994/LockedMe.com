@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Lockers {
-static File files = new File("C:\\Users\\anil.rawat\\eclipse-workspace\\LockedMe.com");
+static String directory = System.getProperty("user.dir");
+static File files = new File(directory);
+	
 	static void mainmenu() throws IOException {
 	Scanner sc = new Scanner(System.in);
 	System.out.println(" 1. Directory" + "\n 2. Details of the User Interface" + "\n 3. Closing the Application" + "\n \n Please enter your requirement (Sr. No. 1, 2 & 3)");
@@ -130,6 +132,7 @@ static void returntomainmenu() throws IOException{
 public static void main(String[] args) throws IOException {
 	System.out.println("Welcome to LockedMe.com");
 	System.out.println("Developer - Anil Singh Rawat");
+
 	Lockers.mainmenu();
     }
    }
