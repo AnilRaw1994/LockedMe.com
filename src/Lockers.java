@@ -76,7 +76,8 @@ static void addfiles(String inputfile) throws IOException {
 	inputfile = inputfile + ".txt";
 	File file = new File(inputfile);
 	if(file.createNewFile()) {
-	System.out.println(inputfile + " "+ "file Created Successfully");
+		String path = files.getAbsolutePath();
+	System.out.println(inputfile + " "+ "file Created Successfully " + path);
 		}else 
 			{
 	System.out.println(inputfile + " file not Created Successfully");
